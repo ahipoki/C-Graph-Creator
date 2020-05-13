@@ -14,19 +14,49 @@ int main()
     cin.getline(input, sizeof(input));
     strupper(input);
     if (strcmp(input, "ADD VERTEX") == 0){
-      cout<<"Added a vertex"<<endl;
+      char label[80];
+      cout<<"Enter a label for the vertex"<<endl;
+      cin.getline(label, sizeof(label));
+      strupper(label);
     }
     else if (strcmp(input, "ADD EDGE") == 0){
-      cout<<"Added an edge"<<endl;
+      char name1[80];
+      char name2[80];
+      int weight;
+      cout<<"Enter a vertex name"<<endl;
+      cin.getline(name1, sizeof(name1));
+      strupper(name1);
+      cout<<"Enter a second vertex name"<<endl;
+      cin.getline(name2, sizeof(name2));
+      strupper(name2);
+      cout<<"Enter a weight for the edge"<<endl;
+      cin>>weight;
     }
     else if (strcmp(input, "REMOVE VERTEX") == 0){
-      cout<<"Removed a vertex"<<endl;
+      char name[80];
+      cout<<"Enter a vertex name that you want to remove"<<endl;
+      cin.getline(name, sizeof(name));
+      strupper(name);
     }
     else if (strcmp(input, "REMOVE EDGE") == 0){
-      cout<<"Removed an edge"<<endl;
+      char name1[80];
+      char name2[80];
+      cout<<"Enter a vertex name"<<endl;
+      cin.getline(name1, sizeof(name1));
+      strupper(name1);
+      cout<<"Enter a second vertex name"<<endl;
+      cin.getline(name2, sizeof(name2));
+      strupper(name2);
     }
     else if (strcmp(input, "PATH") == 0){
-      cout<<"Shortest Path"<<endl;
+      char name1[80];
+      char name2[80];
+      cout<<"Enter a vertex name"<<endl;
+      cin.getline(name1, sizeof(name1));
+      strupper(name1);
+      cout<<"Enter a second vertex name"<<endl;
+      cin.getline(name2, sizeof(name2));
+      strupper(name2);
     }
     else if (strcmp(input, "QUIT") == 0){
       running = false;
