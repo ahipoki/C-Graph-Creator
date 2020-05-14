@@ -9,6 +9,7 @@ int main()
 {
   char input[80];
   bool running = true;
+  adj[20][20];
   while (running){
     cout<<"Do you want to add a vertex, add an edge, remove a vertex, remove an edge, find the shortest path, or quit?"<<endl;
     cin.getline(input, sizeof(input));
@@ -31,6 +32,17 @@ int main()
       strupper(name2);
       cout<<"Enter a weight for the edge"<<endl;
       cin>>weight;
+      for (int i = 0; i < 20; i++){
+        for (int j = 0; j < 20; j++){
+          if (strcmp(name1, adj[i]) == 0){
+            if (strcmp(name2, adj[j]) == 0){
+              cout<<"Edge added"<<endl;
+            }
+            cout<<"Vertex not found"<<endl;
+          }
+          cout<<"Vertex not found"<<endl;
+        }
+      }
     }
     else if (strcmp(input, "REMOVE VERTEX") == 0){
       char name[80];
