@@ -8,6 +8,8 @@ void addVertex();
 void addEdge();
 void deleteVertex();
 void deleteEdge();
+void getShortestPath();
+void printGraph();
 
 int main()
 {
