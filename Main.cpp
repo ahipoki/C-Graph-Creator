@@ -4,6 +4,10 @@
 using namespace std;
 
 void strupper(char* str);
+void addVertex();
+void addEdge();
+void deleteVertex();
+void deleteEdge();
 
 int main()
 {
