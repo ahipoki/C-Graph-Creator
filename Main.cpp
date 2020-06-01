@@ -21,65 +21,31 @@ int main()
     cin.getline(input, sizeof(input));
     strupper(input);
     if (strcmp(input, "ADD VERTEX") == 0){
-      char label[80];
-      cout<<"Enter a label for the vertex"<<endl;
-      cin.getline(label, sizeof(label));
-      strupper(label);
+      addVertex(vertices, nextVertexIndex);
     }
     else if (strcmp(input, "ADD EDGE") == 0){
-      char name1[80];
-      char name2[80];
-      int weight;
-      cout<<"Enter a vertex name"<<endl;
-      cin.getline(name1, sizeof(name1));
-      strupper(name1);
-      cout<<"Enter a second vertex name"<<endl;
-      cin.getline(name2, sizeof(name2));
-      strupper(name2);
-      cout<<"Enter a weight for the edge"<<endl;
-      cin>>weight;
-      for (int i = 0; i < 20; i++){
-        for (int j = 0; j < 20; j++){
-          if (strcmp(name1, adj[i]) == 0){
-            if (strcmp(name2, adj[j]) == 0){
-              cout<<"Edge added"<<endl;
-            }
-            cout<<"Vertex not found"<<endl;
-          }
-          cout<<"Vertex not found"<<endl;
-        }
-      }
+      addEdge(table, vertices);
     }
     else if (strcmp(input, "REMOVE VERTEX") == 0){
-      char name[80];
-      cout<<"Enter a vertex name that you want to remove"<<endl;
-      cin.getline(name, sizeof(name));
-      strupper(name);
+      deleteVertex(table, vertices, nextVertexIndex);
     }
     else if (strcmp(input, "REMOVE EDGE") == 0){
-      char name1[80];
-      char name2[80];
-      cout<<"Enter a vertex name"<<endl;
-      cin.getline(name1, sizeof(name1));
-      strupper(name1);
-      cout<<"Enter a second vertex name"<<endl;
-      cin.getline(name2, sizeof(name2));
-      strupper(name2);
+      deleteEdge(table, vertices);
     }
     else if (strcmp(input, "PATH") == 0){
-      char name1[80];
-      char name2[80];
-      cout<<"Enter a vertex name"<<endl;
-      cin.getline(name1, sizeof(name1));
-      strupper(name1);
-      cout<<"Enter a second vertex name"<<endl;
-      cin.getline(name2, sizeof(name2));
-      strupper(name2);
+      getShortestPath(table, vertices);
+    }
+    else if (strcmp(input, "PRINT") == 0){
+      printGraph(table, vertices);
     }
     else if (strcmp(input, "QUIT") == 0){
       running = false;
     }
+    else{
+      cout<<"Input not valid"<<endl;
+    }
   }
+  return 0;
 }
 
 void strupper(char* str){
