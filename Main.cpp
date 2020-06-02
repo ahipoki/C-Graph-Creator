@@ -42,7 +42,7 @@ int main()
       running = false;
     }
     else{
-      cout<<"Input not valid"<<endl;
+      cout<<"That isn't a valid command"<<endl;
     }
   }
   return 0;
