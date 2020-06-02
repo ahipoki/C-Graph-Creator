@@ -54,3 +54,27 @@ void strupper(char* str){
     str[i] = toupper(str[i]);
   }
 }
+
+void addVertex(){
+  
+}
+
+void addEdge(){
+  
+}
+
+void deleteVertex(){
+  
+}
+
+void deleteEdge(){
+  
+}
+
+void getShortestPath(){
+  
+}
+
+void printGraph(){
+  
+}
