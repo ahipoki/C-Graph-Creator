@@ -6,7 +6,7 @@
 using namespace std;
 
 void strupper(char* str);
-void addVertex();
+void addVertex(map<char*, int*, >);
 void addEdge();
 void deleteVertex();
 void deleteEdge();
