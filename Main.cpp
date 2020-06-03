@@ -82,6 +82,10 @@ void addVertex(map<char*, int, >* vertices, int& nextVertexIndex){
 }
 
 void addEdge(){
+  char* vertexOne[80];
+  char* vertexTwo[80];
+  cout<<"Enter a vertex label"<<endl;
+  cin.getline(vertexOne, sizeof(vertexOne));
   
 }
 
