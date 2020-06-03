@@ -8,7 +8,7 @@ using namespace std;
 void strupper(char* str);
 void addVertex(map<char*, int, >*, int&);
 void addEdge(int*, map<char*, int, >*);
-void deleteVertex();
+void deleteVertex(int*, map<char*, int>*, int&);
 void deleteEdge();
 void getShortestPath();
 void printGraph();
@@ -57,8 +57,28 @@ void strupper(char* str){
   }
 }
 
-void addVertex(map<char*, int, >*, int&){
-  
+void addVertex(map<char*, int, >* vertices, int& nextVertexIndex){
+  if (nextVertexIndex == 20){
+    cout<<"There's too many vertices"<<endl;
+    return;
+  }
+  char label[80];
+  cout<<"Enter a label for the vertex"<<endl;
+  cin.getline(label, sizeof(label));
+  cin.clear();
+  cin.ignore(999, '\n');
+  map<char*, int>::iterator it;
+  if (vertices->find(label) != vertices->end()){
+    cout<<"There's already a vertex with that label"<<endl;
+    return;
+  }
+  (*vertices)[label] = nextVertexIndex;
+  nextVertexIndex = 0;
+  while (find(vertices, nextVertexIndex) != NULL){
+    nextVertexIndex++;
+  }
+  cout<<"Vertex added"<<endl;
+  return;
 }
 
 void addEdge(){
