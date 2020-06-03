@@ -6,8 +6,8 @@
 using namespace std;
 
 void strupper(char* str);
-void addVertex(map<char*, int*, >);
-void addEdge();
+void addVertex(map<char*, int, >*, int&);
+void addEdge(int*, map<char*, int, >*);
 void deleteVertex();
 void deleteEdge();
 void getShortestPath();
