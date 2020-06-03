@@ -57,7 +57,7 @@ void strupper(char* str){
   }
 }
 
-void addVertex(){
+void addVertex(map<char*, int, >*, int&){
   
 }
 
