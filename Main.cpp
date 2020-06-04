@@ -113,6 +113,10 @@ void addEdge(){
     cout<<"The edge's weight must be positive"<<endl;
     return;
   }
+  int tempOne = vertices->find(vertexOne)->second;
+  int tempTwo = vertices->find(vertexTwo)->second;
+  table[tempOne][tempTwo] = edgeWeight;
+  return;
 }
 
 void deleteVertex(){
