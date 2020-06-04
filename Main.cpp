@@ -86,7 +86,8 @@ void addEdge(){
   char* vertexTwo[80];
   cout<<"Enter a vertex label"<<endl;
   cin.getline(vertexOne, sizeof(vertexOne));
-  
+  cin.clear();
+  cin.ignore(999, '\n');
 }
 
 void deleteVertex(){
