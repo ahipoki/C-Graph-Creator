@@ -125,6 +125,10 @@ void deleteVertex(){
   cin.getline(label, sizeof(label));
   cin.clear();
   cin.ignore(999, '\n');
+  if (vertices->find(label) == vertices->end()){
+    cout<<label<<" does not exist"<<endl;
+    return;
+  }
 }
 
 void deleteEdge(){
