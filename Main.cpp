@@ -88,6 +88,31 @@ void addEdge(){
   cin.getline(vertexOne, sizeof(vertexOne));
   cin.clear();
   cin.ignore(999, '\n');
+  cout<<"Enter another vertex label"<<endl;
+  cin.getline(vertexTwo, sizeof(vertexTwo));
+  cin.clear();
+  cin.ignore(999, '\n');
+  if (strcmp(vertexOne, vertexTwo) == 0){
+    cout<<"You need to enter two different vertex labels"<<endl;
+    return;
+  }
+  if (vertices->find(vertexOne) == vertices->end()){
+    cout<<vertexOne<<" does not exist"<<endl;
+    return;
+  }
+  if (vertices->find(vertexTwo) == vertices->end()){
+    cout<<vertexTwo<<" does not exist"<<endl;
+    return;
+  }
+  cout<<"Enter a weight for the edge"<<endl;
+  int edgeWeight;
+  cin>>edgeWeight;
+  cin.clear();
+  cin.ignore(999, '\n');
+  if (edgeWeight <= 0){
+    cout<<"The edge's weight must be positive"<<endl;
+    return;
+  }
 }
 
 void deleteVertex(){
