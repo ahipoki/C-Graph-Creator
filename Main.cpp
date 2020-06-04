@@ -120,7 +120,11 @@ void addEdge(){
 }
 
 void deleteVertex(){
-  
+  char label[80];
+  cout<<"Enter the vertex label you want to delete"<<endl;
+  cin.getline(label, sizeof(label));
+  cin.clear();
+  cin.ignore(999, '\n');
 }
 
 void deleteEdge(){
