@@ -25,10 +25,17 @@ int main()
 {
   map<char*, int, compareChars>* vertices = new map<char*, int, compareChars>;
   int nextVertex = 0;
+  int** table = new int*[20];
+  for (int i = 0; i < 20; i++){
+    table[i] = new int[20];
+    for (int j = 0; j < 20; j++){
+      table[i][j] = -1;
+    }
+  }
   char input[80];
   bool running = true;
   while (running){
-    cout<<"Do you want to add a vertex, add an edge, remove a vertex, remove an edge, find the shortest path, or quit?"<<endl;
+    cout<<"Do you want to add a vertex, add an edge, remove a vertex, remove an edge, find the shortest path, print out the connections, or quit?"<<endl;
     cin.getline(input, sizeof(input));
     strupper(input);
     if (strcmp(input, "ADD VERTEX") == 0){
@@ -56,6 +63,11 @@ int main()
       cout<<"That isn't a valid command"<<endl;
     }
   }
+  delete vertices;
+  for (int i = 0; i < 20; i++){
+    delete[] table[i];
+  }
+  delete[] table;
   return 0;
 }
 
