@@ -23,9 +23,10 @@ char* find(map<char*, int, compareChars>*, int);
 
 int main()
 {
+  map<char*, int, compareChars>* vertices = new map<char*, int, compareChars>;
+  int nextVertex = 0;
   char input[80];
   bool running = true;
-  adj[20][20];
   while (running){
     cout<<"Do you want to add a vertex, add an edge, remove a vertex, remove an edge, find the shortest path, or quit?"<<endl;
     cin.getline(input, sizeof(input));
