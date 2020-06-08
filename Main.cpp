@@ -78,8 +78,8 @@ void strupper(char* str){
   }
 }
 
-void addVertex(map<char*, int, >* vertices, int& nextVertexIndex){
-  if (nextVertexIndex == 20){
+void addVertex(map<char*, int, compareChars>* vertices, int& nextVertex){
+  if (nextVertex == 20){
     cout<<"There's too many vertices"<<endl;
     return;
   }
@@ -93,18 +93,18 @@ void addVertex(map<char*, int, >* vertices, int& nextVertexIndex){
     cout<<"There's already a vertex with that label"<<endl;
     return;
   }
-  (*vertices)[label] = nextVertexIndex;
-  nextVertexIndex = 0;
-  while (find(vertices, nextVertexIndex) != NULL){
-    nextVertexIndex++;
+  (*vertices)[label] = nextVertex;
+  nextVertex = 0;
+  while (find(vertices, nextVertex) != NULL){
+    nextVertex++;
   }
   cout<<"Vertex added"<<endl;
   return;
 }
 
-void addEdge(){
-  char* vertexOne[80];
-  char* vertexTwo[80];
+void addEdge(int**& table, map<char*, int, compareChars>* vertices){
+  char vertexOne[80];
+  char vertexTwo[80];
   cout<<"Enter a vertex label"<<endl;
   cin.getline(vertexOne, sizeof(vertexOne));
   cin.clear();
@@ -134,9 +134,9 @@ void addEdge(){
     cout<<"The edge's weight must be positive"<<endl;
     return;
   }
-  int tempOne = vertices->find(vertexOne)->second;
-  int tempTwo = vertices->find(vertexTwo)->second;
-  table[tempOne][tempTwo] = edgeWeight;
+  int pointOne = vertices->find(vertexOne)->second;
+  int pointTwo = vertices->find(vertexTwo)->second;
+  table[pointOne][pointTwo] = edgeWeight;
   return;
 }
 
