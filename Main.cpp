@@ -140,7 +140,7 @@ void addEdge(int**& table, map<char*, int, compareChars>* vertices){
   return;
 }
 
-void deleteVertex(){
+void deleteVertex(int**& table, map<char*, int, compareChars>* vertices, int& nextVertex){
   char label[80];
   cout<<"Enter the vertex label you want to delete"<<endl;
   cin.getline(label, sizeof(label));
@@ -150,10 +150,43 @@ void deleteVertex(){
     cout<<label<<" does not exist"<<endl;
     return;
   }
+  int point = (*vertices)[label];
+  vertices->erase(label);
+  for (int i = 0; i < 20; i++){
+    table[point][i] = -1;
+    table[i][point] = -1;
+  }
+  nextVertex = point;
+  return;
 }
 
-void deleteEdge(){
-  
+void deleteEdge(int**& table, map<char*, int, compareChars>* vertices){
+  char vertexOne[80];
+  char vertexTwo[80];
+  cout<<"Enter the first vertex label"<<endl;
+  cin.getline(vertexOne, sizeof(vertexOne));
+  cin.clear();
+  cin.ignore(999, '\n');
+  if (strcmp(vertexOne, vertexTwo) == 0){
+    cout<<"Please enter two different vertex labels"<<endl;
+    return;
+  }
+  if (vertices->find(vertexOne) == vertices->end()){
+    cout<<vertexOne<<" does not exist"<<endl;
+    return;
+  }
+  if (vertices->find(vertexTwo) == vertices->end()){
+    cout<<vertexTwo<<" does not exist"<<endl;
+    return;
+  }
+  int pointOne = vertices->find(vertexOne)->second;
+  int pointTwo = vertices->find(vertexTwo)->second;
+  if (table[pointOne][pointTwo] == -1){
+    cout<<"No edge exists between those two labels"<<endl;
+    return;
+  }
+  table[pointOne][pointTwo] = -1;
+  return;
 }
 
 void getShortestPath(){
