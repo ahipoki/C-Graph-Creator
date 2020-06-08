@@ -5,13 +5,21 @@
 
 using namespace std;
 
+struct compareChars{
+  bool operator()(const char* a, const char* b) const{
+    return strcmp(a, b) < 0;
+  }
+};
+
 void strupper(char* str);
-void addVertex(map<char*, int, >*, int&);
-void addEdge(int*, map<char*, int, >*);
-void deleteVertex(int*, map<char*, int>*, int&);
-void deleteEdge();
-void getShortestPath();
-void printGraph();
+void addVertex(map<char*, int, compareChars>*, int&);
+void addEdge(int**&, map<char*, int, compareChars>*);
+void deleteVertex(int**&, map<char*, int, compareChars>*, int&);
+void deleteEdge(int**&, map<char*, int, compareChars>*, int&);
+void getShortestPath(int**, map<char*, int, compareChars>*);
+void printGraph(int**, map<char*, int, compareChars>*);
+int* dijkstra(int, int, int*&, bool*, int*, map<char*, int, compareChars>*, int**);
+char* find(map<char*, int, compareChars>*, int);
 
 int main()
 {
