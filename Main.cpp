@@ -244,6 +244,34 @@ void getShortestPath(int** table, map<char*, int, compareChars>* vertices){
   return;
 }
 
+int* dijkstra(int start, int end, int*& distance, bool* visited, int* parent, map<char*, int, compareChars>* vertexMap, int** table){
+  if (start == end){
+    return parent;
+  }
+  int next = -1;
+  int low = 1;
+  bool finished = true;
+  for (int i = 0; i < 20; i++){
+    if (table[s][i] != -1 && !visited[i]){
+      int newDistance = distance[s] + table[s][i];
+      if (distance[i] == 0 || distance[i] > newDistance){
+        distance[i] = newDistance;
+        parent[i] = start;
+      }
+      if (distance[i] < low){
+        next = i;
+        low = distance[i];
+      }
+      finished = false;
+    }
+  }
+  visited[start] = true;
+  if (finished){
+    return NULL;
+  }
+  return dijkstra(next, end, distance, visited, parent, vertexMap, table);
+}
+
 void printGraph(){
   
 }
