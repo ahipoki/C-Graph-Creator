@@ -294,3 +294,8 @@ void printGraph(int** table, map<char*, int, compareChars>* vertices){
     cout<<endl;
   }
 }
+
+char* find(map<char*, int, compareChars>* vertices, int n){
+  map<char*, int, compareChars>::iterator it;
+  for (it = vertices->begin(); 
+}
