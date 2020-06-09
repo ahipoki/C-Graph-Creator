@@ -272,6 +272,25 @@ int* dijkstra(int start, int end, int*& distance, bool* visited, int* parent, ma
   return dijkstra(next, end, distance, visited, parent, vertexMap, table);
 }
 
-void printGraph(){
-  
+void printGraph(int** table, map<char*, int, compareChars>* vertices){
+  cout<<"Connections:"<<endl;
+  for (int i = 0; i < 20; i++){
+    char* length = find(vertices, i);
+    if (length == NULL){
+      continue;
+    }
+    bool first = true;
+    cout<<length<<": ";
+    for (int j = 0; j < 20; j++){
+      if (table[i][j] == -1){
+        continue;
+      }
+      if (!first){
+        cout<<", ";
+      }
+      first = false;
+      cout<<find(vertices, j)<<"("<<table[i][j]<<")";
+    }
+    cout<<endl;
+  }
 }
