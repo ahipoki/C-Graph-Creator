@@ -78,7 +78,7 @@ void strupper(char* str){
   }
 }
 
-void addVertex(map<char*, int, compareChars>* vertices, int &nextVertex) {
+void addVertex(map<char*, int, compareChars>* vertices, int &nextVertex){
   if (nextVertex == 20){
     cout << "There are too many vertices" << endl;
     return; 
