@@ -7,7 +7,7 @@ using namespace std;
 
 struct compareChars{
   bool operator()(const char* a, const char* b) const{
-    return strcmp(a, b) < 0;
+    return strcmp(a, b)<0;
   }
 };
 
@@ -15,7 +15,7 @@ void strupper(char* str);
 void addVertex(map<char*, int, compareChars>*, int&);
 void addEdge(int**&, map<char*, int, compareChars>*);
 void deleteVertex(int**&, map<char*, int, compareChars>*, int&);
-void deleteEdge(int**&, map<char*, int, compareChars>*, int&);
+void deleteEdge(int**&, map<char*, int, compareChars>*);
 void getShortestPath(int**, map<char*, int, compareChars>*);
 void printGraph(int**, map<char*, int, compareChars>*);
 int* dijkstra(int, int, int*&, bool*, int*, map<char*, int, compareChars>*, int**);
@@ -35,17 +35,17 @@ int main()
   char input[80];
   bool running = true;
   while (running){
-    cout<<"Do you want to add a vertex, add an edge, remove a vertex, remove an edge, find the shortest path, print out the connections, or quit?"<<endl;
+    cout<<"Do you want to add a vertex, add an edge, remove a vertex, remove an edge, find the shortest path, print the connections, or quit?"<<endl;
     cin.getline(input, sizeof(input));
     strupper(input);
     if (strcmp(input, "ADD VERTEX") == 0){
-      addVertex(vertices, nextVertexIndex);
+      addVertex(vertices, nextVertex);
     }
     else if (strcmp(input, "ADD EDGE") == 0){
       addEdge(table, vertices);
     }
     else if (strcmp(input, "REMOVE VERTEX") == 0){
-      deleteVertex(table, vertices, nextVertexIndex);
+      deleteVertex(table, vertices, nextVertex);
     }
     else if (strcmp(input, "REMOVE EDGE") == 0){
       deleteEdge(table, vertices);
@@ -78,27 +78,24 @@ void strupper(char* str){
   }
 }
 
-void addVertex(map<char*, int, compareChars>* vertices, int& nextVertex){
+void addVertex(map<char*, int, compareChars>* vertices, int &nextVertex) {
   if (nextVertex == 20){
-    cout<<"There's too many vertices"<<endl;
-    return;
+    cout << "There are too many vertices" << endl;
+    return; 
   }
-  char label[80];
-  cout<<"Enter a label for the vertex"<<endl;
-  cin.getline(label, sizeof(label));
-  cin.clear();
-  cin.ignore(999, '\n');
-  map<char*, int>::iterator it;
-  if (vertices->find(label) != vertices->end()){
-    cout<<"There's already a vertex with that label"<<endl;
+  char* label = new char();
+  cout << "Input vertex label (max 80 chars)" << endl;
+  cin.get(label, 81);
+  map<char*, int>::iterator it; 
+  if (vertices -> find(label) != vertices -> end()){
+    cout <<label<<" already exists"<<endl;
     return;
   }
   (*vertices)[label] = nextVertex;
   nextVertex = 0;
-  while (find(vertices, nextVertex) != NULL){
-    nextVertex++;
+  while(find(vertices, nextVertex) != NULL){
+    nextVertex++; 
   }
-  cout<<"Vertex added"<<endl;
   return;
 }
 
@@ -134,9 +131,9 @@ void addEdge(int**& table, map<char*, int, compareChars>* vertices){
     cout<<"The edge's weight must be positive"<<endl;
     return;
   }
-  int pointOne = vertices->find(vertexOne)->second;
-  int pointTwo = vertices->find(vertexTwo)->second;
-  table[pointOne][pointTwo] = edgeWeight;
+  int tempOne = vertices->find(vertexOne)->second;
+  int tempTwo = vertices->find(vertexTwo)->second;
+  table[tempOne][tempTwo] = edgeWeight;
   return;
 }
 
@@ -167,8 +164,12 @@ void deleteEdge(int**& table, map<char*, int, compareChars>* vertices){
   cin.getline(vertexOne, sizeof(vertexOne));
   cin.clear();
   cin.ignore(999, '\n');
+  cout<<"Enter the second vertex label"<<endl;
+  cin.getline(vertexTwo, sizeof(vertexTwo));
+  cin.clear();
+  cin.ignore(999, '\n');
   if (strcmp(vertexOne, vertexTwo) == 0){
-    cout<<"Please enter two different vertex labels"<<endl;
+    cout<<"Enter two different vertex labels"<<endl;
     return;
   }
   if (vertices->find(vertexOne) == vertices->end()){
@@ -179,13 +180,13 @@ void deleteEdge(int**& table, map<char*, int, compareChars>* vertices){
     cout<<vertexTwo<<" does not exist"<<endl;
     return;
   }
-  int pointOne = vertices->find(vertexOne)->second;
-  int pointTwo = vertices->find(vertexTwo)->second;
-  if (table[pointOne][pointTwo] == -1){
+  int ref1 = vertices->find(vertexOne)->second;
+  int ref2 = vertices->find(vertexTwo)->second;
+  if (table[ref1][ref2] == -1){
     cout<<"No edge exists between those two labels"<<endl;
     return;
   }
-  table[pointOne][pointTwo] = -1;
+  table[ref1][ref2] = -1;
   return;
 }
 
@@ -244,19 +245,19 @@ void getShortestPath(int** table, map<char*, int, compareChars>* vertices){
   return;
 }
 
-int* dijkstra(int start, int end, int*& distance, bool* visited, int* parent, map<char*, int, compareChars>* vertexMap, int** table){
-  if (start == end){
+int* dijkstra(int s, int e, int*& distance, bool* visited, int* parent, map<char*, int, compareChars>* vmap, int** table){
+  if (s == e){
     return parent;
   }
   int next = -1;
-  int low = 1;
+  int low = 5;
   bool finished = true;
   for (int i = 0; i < 20; i++){
     if (table[s][i] != -1 && !visited[i]){
-      int newDistance = distance[s] + table[s][i];
-      if (distance[i] == 0 || distance[i] > newDistance){
-        distance[i] = newDistance;
-        parent[i] = start;
+      int newd = distance[s] + table[s][i];
+      if (distance[i] == 0 || distance[i] > newd){
+        distance[i] = newd;
+        parent[i] = s;
       }
       if (distance[i] < low){
         next = i;
@@ -265,22 +266,22 @@ int* dijkstra(int start, int end, int*& distance, bool* visited, int* parent, ma
       finished = false;
     }
   }
-  visited[start] = true;
+  visited[s] = true;
   if (finished){
     return NULL;
   }
-  return dijkstra(next, end, distance, visited, parent, vertexMap, table);
+  return dijkstra(next, e, distance, visited, parent, vmap, table);
 }
 
 void printGraph(int** table, map<char*, int, compareChars>* vertices){
-  cout<<"Connections:"<<endl;
+  cout<<"Connections: "<<endl;
   for (int i = 0; i < 20; i++){
-    char* length = find(vertices, i);
-    if (length == NULL){
+    char* l = find(vertices, i);
+    if (l == NULL){
       continue;
     }
     bool first = true;
-    cout<<length<<": ";
+    cout<<l<<": ";
     for (int j = 0; j < 20; j++){
       if (table[i][j] == -1){
         continue;
