@@ -297,5 +297,10 @@ void printGraph(int** table, map<char*, int, compareChars>* vertices){
 
 char* find(map<char*, int, compareChars>* vertices, int n){
   map<char*, int, compareChars>::iterator it;
-  for (it = vertices->begin(); 
+  for (it = vertices->begin(); it != vertices->end(); ++it){
+    if (it->second == n){
+      return it->first;
+    }
+  }
+  return NULL;
 }
