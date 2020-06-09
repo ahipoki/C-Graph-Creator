@@ -189,8 +189,59 @@ void deleteEdge(int**& table, map<char*, int, compareChars>* vertices){
   return;
 }
 
-void getShortestPath(){
-  
+void getShortestPath(int** table, map<char*, int, compareChars>* vertices){
+  char vertexOne[80];
+  char vertexTwo[80];
+  cout<<"Enter starting vertex"<<endl;
+  cin.getline(vertexOne, sizeof(vertexOne));
+  cin.clear();
+  cin.ignore(999, '\n');
+  cout<<"Enter ending vertex"<<endl;
+  cin.getline(vertexTwo, sizeof(vertexTwo));
+  cin.clear();
+  cin.ignore(999, '\n');
+  if (strcmp(vertexOne, vertexTwo) == 0){
+    cout<<"The two vertices are the same so the distance between them is 0"<<endl;
+    return;
+  }
+  if (vertices->find(vertexOne) == vertices->end()){
+    cout<<vertexOne<<" does not exist"<<endl;
+    return;
+  }
+  if (vertices->find(vertexTwo) == vertices->end()){
+    cout<<vertexTwo<<" does not exist"<<endl;
+    return;
+  }
+  int start = vertices->find(vertexOne)->second;
+  int end = vertices->find(vertexTwo)->second;
+  int* distance = NULL;
+  distance = new int[20];
+  bool visited[20];
+  int parents[20];
+  int* parent = dijkstra(start, end, distance, visited, parents, vertices, table);
+  if (parent == NULL){
+    cout<<"No path between "<<vertexOne<<" and "<<vertexTwo<<" found"<<endl;
+    return;
+  }
+  vector<char*>* path = new vector<char*>();
+  int x = end;
+  while (x != start){
+    path->push_back(find(vertices, x));
+    x = parent[x];
+  }
+  path->push_back(find(vertices, start));
+  cout<<"Shortest path is: ";
+  bool isFirst = true;
+  vector<char*>::reverse_iterator it;
+  for (it = path->rbegin(); it != path->rend(); ++it){
+    if (!isFirst){
+      cout<<"->";
+    }
+    isFirst = false;
+    cout<<*it;
+  }
+  cout<<endl<<"With length "<<distance[end]<<endl;
+  return;
 }
 
 void printGraph(){
